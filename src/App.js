@@ -5,14 +5,18 @@ import { useEffect, useState } from 'react';
 
 
 function App() {
-  var baseUrl = "http://localhost:816";
+  //var baseUrl = "http://localhost:816";
+  var baseUrl = 'https://m28mjnsyp8.execute-api.ap-south-1.amazonaws.com/Prod';
 
   const [games, setGames] = useState([]);
 
   const onLoadGames = () => {
+    axios.defaults.headers.common['x-api-key'] = `jfvVfOe3bm5oEvY9yn0Ar9FUPLAvpMzu7HPb8XRw`;
+    axios.defaults.headers.common['x-tenant-key'] = 'TENANT#KEY';
+
     axios.get(`${baseUrl}/api/game/gamebyfilters`)
       .then(response => {
-        console.log('***', response.data.data);
+        console.log('***', response.data);
         setGames(response.data.data)
       })
   }
